@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-candle-core = { version = "0.3", features = ["cuda"] }
-candle-nn = "0.3"
-candle-transformers = "0.3"
+candle-core = { version = "0.10.2", features = ["cuda"] }
+candle-nn = "0.10.2"
+candle-transformers = "0.10.2"
 tokio = { version = "1.35", features = ["full"] }
 image = "0.24"
 anyhow = "1.0"
@@ -17,7 +17,8 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 ndarray = "0.15"
 ndarray-stats = "0.5"
-cudarc = { version = "0.10", features = ["cuda-12020"] }
+cudarc = { version = "0.19.4", features = ["cuda-version-from-build-system", "fallback-latest"] }
+
 
 [profile.release]
 opt-level = 3
