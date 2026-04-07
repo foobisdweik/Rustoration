@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RustyCunnyGui"
+        xmlns:z="clr-namespace:Zafiro.Avalonia.Controls;assembly=Zafiro.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="RustyCunnyGui.MainWindow"
+        x:DataType="local:MainWindowViewModel"
+        Title="Rusty Cunny - Image Restoration Utility"
+        Width="900" Height="700">
+
+    <Design.DataContext>
+        <local:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="20">
+        <StackPanel Grid.Row="0" Spacing="20">
+            <TextBlock Text="Rusty Cunny Restoration" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource SystemAccentColor}" />
+            
+            <z:HeaderedContainer Header="Pipeline Settings">
+                <StackPanel Spacing="10">
+                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="5">
+                            <TextBlock Text="Input Directory:" FontWeight="SemiBold" />
+                            <TextBox Text="{Binding InputPath}" Watermark="Path to images or directory" />
+                        </StackPanel>
+                        <Button Grid.Row="0" Grid.Column="1" Content="Browse" VerticalAlignment="Bottom" Margin="5,0,0,0"
+                                Command="{Binding BrowseInputCommand}" CommandParameter="{Binding $parent[Window].StorageProvider}" />
+
+                        <StackPanel Grid.Row="1" Grid.Column="0" Spacing="5" Margin="0,10,0,0">
+                            <TextBlock Text="Output Directory:" FontWeight="SemiBold" />
+                            <TextBox Text="{Binding OutputPath}" Watermark="Where to save restored images" />
+                        </StackPanel>
+                        <Button Grid.Row="1" Grid.Column="1" Content="Browse" VerticalAlignment="Bottom" Margin="5,0,0,0"
+                                Command="{Binding BrowseOutputCommand}" CommandParameter="{Binding $parent[Window].StorageProvider}" />
+                    </Grid>
+
+                    <StackPanel Spacing="5">
+                        <TextBlock Text="Restoration Prompt:" FontWeight="SemiBold" />
+                        <TextBox Text="{Binding Prompt}" AcceptsReturn="True" Height="60" Watermark="e.g., high quality restoration, sharp details" />
+                    </StackPanel>
+                </StackPanel>
+            </z:HeaderedContainer>
+        </StackPanel>
+
+        <z:HeaderedContainer Grid.Row="1" Header="Process Logs" Margin="0,20,0,0">
+            <TextBox Text="{Binding Logs}" IsReadOnly="True" AcceptsReturn="True" 
+                     FontFamily="Consolas,Monospace" FontSize="12"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                     ScrollViewer.VerticalScrollBarVisibility="Visible" />
+        </z:HeaderedContainer>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" Margin="0,20,0,0">
+            <Button Content="Stop" Command="{Binding StopRestorationCommand}" IsVisible="{Binding IsProcessing}" Classes="warning" />
+            <Button Content="Start Restoration" Command="{Binding StartRestorationCommand}" IsEnabled="{Binding !IsProcessing}" Classes="accent" Padding="20,10" />
+        </StackPanel>
+    </Grid>
+</Window>
