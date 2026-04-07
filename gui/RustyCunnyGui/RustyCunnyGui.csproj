@@ -5,6 +5,10 @@
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
         <UseWPF>false</UseWPF>
         <Nullable>enable</Nullable>
+        <!-- Deployment & Maximum Portability -->
+        <SelfContained>true</SelfContained>
+        <PublishSingleFile>true</PublishSingleFile>
+        <IncludeNativeLibrariesForSelfContained>true</IncludeNativeLibrariesForSelfContained>
     </PropertyGroup>
 
     <ItemGroup>

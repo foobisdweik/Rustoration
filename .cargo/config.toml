@@ -1,5 +1,5 @@
-[build]
-rustflags = ["-C", "target-cpu=native"]
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static", "-C", "target-cpu=native"]
 
 [env]
 CUDARC_CUDA_VERSION = { value = "13020", relative = false, force = true }

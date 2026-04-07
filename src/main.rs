@@ -103,7 +103,7 @@ async fn watch_folder(watch_dir: &Path, output_dir: &Path, prompt: &str, pipelin
 
 fn is_image(path: &Path) -> bool {
     if let Some(ext) = path.extension() {
-        matches!(ext.to_str(), Some("png") | Some("jpg") | Some("jpeg"))
+        matches!(ext.to_str(), Some("png") | Some("jpg") | Some("jpeg") | Some("webp"))
     } else {
         false
     }
